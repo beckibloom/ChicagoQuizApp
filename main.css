@@ -13,13 +13,14 @@ h1 {
     font-size: 18px;
 }
 
-h2, legend {
+h3, legend {
     font-size: 14px;
     font-weight: normal;
 }
 
 fieldset {
     min-width: 200px;
+    max-width:75%;
     margin-right:auto;
     margin-left:auto;
     border: 1px solid black;
@@ -51,7 +52,7 @@ input {
     border-radius:10px;
 }
 
-h3 {
+h2 {
     margin-top:20px;
     font-size:18px;
 }
@@ -72,6 +73,10 @@ div.current-score {
 footer {
     margin-top: 20px;
     font-size:14px;
+}
+
+.hidden {
+    display:none;
 }
 
 @media only screen and (min-width:600px) {
