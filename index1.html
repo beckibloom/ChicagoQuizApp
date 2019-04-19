@@ -25,16 +25,26 @@
 
 <body>
 
-  <header>
+  <!--Header is always displayed during quiz-->
+  <header role="banner">
+    <div>
+      <a href="index1.html">
+        <img class="logo" src="">
+      </a>
+    </div>
+    <div>
       <h1>The Taste of Chicago</h1>
+    </div>
   </header>
 
-  <main>
-    <h3>How well do you know the many flavors of Chicago?</h3>
+  <main role="main">
 
-    <form class="start-quiz">
-        <input type="submit" value="Take the quiz!">
-    </form>
+    <div class="startquiz">
+      <h3>How well do you know the many flavors of Chicago?</h3>
+      <button type="button" class="takethequiz">Take the quiz!</button>
+    </div>
+
+    <div class="quizForm"></div>
 
     <!--Quiz questions start-->
     <form class="questions">
@@ -80,14 +90,17 @@
 
   </main>
 
-  <!--Footer should display when user is on the quiz questions screen-->
+  <!--Footer is always displayed during quiz-->
   <footer>
-    <div class="quiz-progress">Question #/10</div>
-    <div class="current-score">Current Score #/10</div>
+    <ul>
+        <li>Question: <span class="question-number">0</span>/10</li>
+        <li>Score: <span class="score">0</span>10</li> 
+    </ul> 
   </footer>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="index.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="index.js"></script>
+  <script src="data.js"></script>
 
 </body>
 </html>
