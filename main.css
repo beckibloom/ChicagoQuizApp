@@ -51,16 +51,21 @@ li span {
 
 button, input {
     padding: 10px;
-    margin: 10px;
+    margin-left: auto;
+    margin-right:auto;
+    margin-top:10px;
     font-size:14px;
     background-color:red;
     color:white;
     border-radius:10px;
+    display:block;
 }
 
 h2 {
     margin-top:20px;
+    margin-bottom:20px;
     font-size:18px;
+    color:red;
 }
 
 div.current-score {

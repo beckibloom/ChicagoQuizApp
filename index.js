@@ -10,7 +10,7 @@ const STORE = [
     answer4: 'Ketchup',
     correctAnswer: 'Ketchup',
     successtext: 'If you put ketchup on your hot dog, prepare to be the laughing stock of Wrigley Field!',
-    successimage: '<img src="https://s3.amazonaws.com/cdn.tastesofchicago.com/images/uploads/category_954_7648.jpg" alt="Two delicious Chicago-style hot dogs">'},
+    successimage: '<img src="https://s3.amazonaws.com/cdn.tastesofchicago.com/images/uploads/category_954_7648.jpg" alt="Two delicious Chicago-style hot dogs" class="success-image">'},
 
     // 1
     {question: 'Question 2: Which of these restaurants serves the best deep dish pizza?',
@@ -103,48 +103,38 @@ const STORE = [
     successimage: '<img src="https://memegenerator.net/img/instances/75901504/mother-nature-you-cannot-have-all-four-seasons-in-one-week-chicago-hold-my-beer.jpg" alt="Picture of Chicago with text: Mother Nature: You cannot have all four seasons in one week. Chicago: Hold my beer">'}
 ]
 
-function renderChicagoQuiz(number) {
+function renderChicagoQuiz(questionNumber) {
     console.log('`renderChicagoQuiz` ran');
-    console.log(`inside renderChicagoQuiz, number is ${number}`);
-    // This function should render or re-render the quiz based on the users progress
-    $('.next-question').click(function(event){
-        // On button click, render the next question in the browser by calling renderQuizQuestion()
-        // Currently set up with the first item from the array; Later - figure out how to increment by 1 each time the button is clicked; // 2 - Users should be prompted through a series of at least 5 multiple choice questions that they can answer.
-        renderQuizQuestion(number); 
-        // Sets the closest div (parent div) to class 'hidden' - should apply to all new generated elements too?
+    $('.start-quiz').click(function(event){
+        renderQuizQuestion(questionNumber);
         $(this).closest('div').addClass('hidden');
-        $('.question-number').text(1);
-    })
-    $('.quizForm').on('click', '.next-question', function(event) {
-        event.preventDefault();
-        console.log('Question submit button was clicked.');
-        // $(renderQuizQuestion(number));
-        // $(this).closest('div').addClass('hidden');
-        number +=1;
-        renderQuizQuestion(number);
+        submitQuizAnswer(questionNumber);
     });
-    console.log(`inside renderChicagoQuiz, number is ${number}`);
+    $('.next-question').click(function(event){
+        renderQuizQuestion(questionNumber);
+        submitQuizAnswer(questionNumber);
+    });
+    // $('.quizForm').on('click', '.next-question', function(event) {
+    //     event.preventDefault();
+    //     console.log('Question submit button was clicked.');
+    //     number +=1;
+    //     renderQuizQuestion(number);
+    // });
 }
 
 function currentQuizQuestion() {
-    // This function is responsible for determining which quiz question the user is working (and restrict other questions from showing?)
-    // Responsible for cycling to the next question when a user is done with previous
-    // 3 - Users should be asked questions 1 after the other.
-    // 4 - Users should only be prompted with 1 question at a time.
     console.log('`currentQuizQuestion` ran');
     let questionNumber = $('.question-number').text();
-    Number(questionNumber);
+    questionNumber = Number(questionNumber);
     renderChicagoQuiz(questionNumber);
-    // increment number by 1 and run the function again
-    console.log(`Inside currentQuizQuestion, questionNumber is ${questionNumber}`);
+    // console.log(`Inside currentQuizQuestion, questionNumber is ${questionNumber}`);
 }
 
 function renderQuizQuestion(questionNumber) {
-    // This function is responsible for rendering whatever the Quiz Question is
     console.log('`renderQuizQuestion` ran');
     const quizQuestionString = generateQuizQuestion(STORE[questionNumber]);  
     $('.quizForm').html(quizQuestionString); 
-    // let number +=1;
+    $('.question-number').text(questionNumber+1);
 }
 
 function generateQuizQuestion(item) {
@@ -168,15 +158,42 @@ function generateQuizQuestion(item) {
               <input type="radio" name="question${item}" value="${item.answer4}"required>${item.answer4} 
             </li>
           </ul>
-          <button type="submit" value="Submit" class="next-question">Submit</button>
+          <button type="submit" value="Submit" class="submit-answer">Submit</button>
         </fieldset>
       </form>
     </div>`;
 }
 
-function submitQuizAnswer() {
-    // 5 - Users should not be able to skip questions.
-    console.log('`submitQuizAnswer` ran');
+function submitQuizAnswer(questionNumber) {
+    $('.submit-answer').click(function(event) {
+        event.preventDefault();
+        let answer = $('input:checked').val();
+        evaluateAnswer(answer, questionNumber);
+    });
+}
+
+function evaluateAnswer(answerVal, questionNumber) {
+    if (answerVal === STORE[questionNumber].correctAnswer) {
+        userFeedbackCorrect(STORE[questionNumber]);
+        renderChicagoQuiz(questionNumber);
+    }
+    else {
+        userFeedbackWrong();
+    }
+}
+
+function userFeedbackCorrect(item) {
+    $('.quizForm').html(`
+    <div class="user-feedback">
+    <h2>Correct!</h2>
+    <div class="user-feedback-text">${item.successtext}</div>
+    ${item.successimage}
+    <button type="button" class="next-question">Continue</button>
+    </div>`);
+}
+
+function userFeedbackWrong() {
+    console.log('userFeedbackWrong ran.')
 }
 
 function renderAnswerSuccessPage() {
@@ -207,12 +224,7 @@ function restartQuiz() {
     console.log('`restartQuiz` ran');
 }
 
-// This will be the callback function when the page loads.
-// It is responsible for rendering the initial state of the quiz app.
-// It will also activate our other individual functions that handle the user's
-// interaction with the quiz.
 function handleChicagoQuiz() {
-    // Insert other necessary functions here.
     currentQuizQuestion();
 }
 
