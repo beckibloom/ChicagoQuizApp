@@ -4,8 +4,6 @@
     padding:0;
 }
 
-/*doesn't show first item as selected until arrow keys*/
-
 body {
     text-align:center;
     background: #add8e6;
@@ -143,12 +141,6 @@ h2 {
     font-size:18px;
 }
 
-div.current-score {
-    margin-top:5px;
-    margin-bottom:5px;
-    font-size: 14px;
-}
-
 .success-image {
     height:250px;
     border-radius: 10px;
@@ -160,15 +152,10 @@ div.current-score {
     color:red;
 }
 
-.hidden {
-    display:none;
-}
-
 @media only screen and (min-width:1000px) {
     ul {
         flex-direction:row;
     }
-
     li {
         margin:10px;
         padding:5px;
