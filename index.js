@@ -134,7 +134,6 @@ function renderQuizQuestion(questionNumber) {
 function generateQuizQuestion(questionNumber) {
     let item = STORE[questionNumber];
     return `
-    <div class="quiz-question">
     <form>
         <fieldset>
         <legend>${item.question}</legend>
@@ -155,8 +154,7 @@ function generateQuizQuestion(questionNumber) {
         <span class="error-text"></span>
         <button type="submit" value="Submit" class="submit-answer">Submit</button>
         </fieldset>
-    </form>
-    </div>`;
+    </form>`;
 }
 
 function submitQuizAnswer(questionNumber) {
