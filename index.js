@@ -33,7 +33,7 @@ const STORE = [
     successimage: '<img src="https://assets3.thrillist.com/v1/image/1296125/size/tl-horizontal_main_2x.jpg" alt="Plate with butter chicken, rice, chickpeas, and naan bread." class="success-image">'},
 
     // 3
-    {question: 'Question 4: You\'re heading out for a night on the town, and looking for a neighborhood full of parties and <span class="PRIDE">PRIDE</span>. Where is your Lyft dropping you off?',
+    {question: 'Question 4: You\'re heading out for a night on the town, and looking for a neighborhood full of parties and <span class="pride p">P</span><span class="pride r">R</span><span class="pride i">I</span><span class="pride d">D</span><span class="pride e">E</span>. Where is your Lyft dropping you off?',
     answer1: 'Roscoe\'s',
     answer2: 'Subterranean',
     answer3: 'Wrigleyville North',
@@ -50,10 +50,10 @@ const STORE = [
     answer4:'Red line',
     correctAnswer: 'Red line',
     successtext: 'The Red Line stops right in the heart of Chinatown for all of your dim sum and bubble tea needs. Yum!',
-    successimage: '<img src="https://www.transitchicago.com/assets/1/6/ctamap_Lsystem.png" alt="Map of the L train system, from Chicago Transit Authority" class="success-image">'},
+    successimage: '<img src="https://i.ytimg.com/vi/yq-3Fo21DLM/maxresdefault.jpg" alt="A red line train with sign for Cermak-Chinatown stop" class="success-image">'},
 
     // 5 
-    {question: 'Question 6: They serve some of the best Italian beef sandwiches in the land, but their owner, Dick, can be kind of a... you-know-what. You\'re on your way to:',
+    {question: 'Question 6: They serve some of the best Italian beef sandwiches in the land, and you\'re especially looking forward to their famous dessert shake, the Chocolate Cake Shake. You\'re on your way to:',
     answer1:'Byron\'s',
     answer2:'Portillo\'s',
     answer3:'Buona Beef',
@@ -89,7 +89,7 @@ const STORE = [
     answer3:'Aon Center',
     answer4:'Willis Tower',
     correctAnswer: 'Willis Tower',
-    successtext: 'The Willis Tower was renamed in 2009 after the Willis Group Holdings leased the naming rights... but nobody likes calling it that. Just ask the 50,000 people who signed the online petition at <a href="www.itsthesearstower.com">ItsTheSearsTower.com</a>.',
+    successtext: 'The Willis Tower was renamed in 2009 after the Willis Group Holdings leased the naming rights... but nobody likes calling it that. Just ask the 50,000 people who signed the online petition at <a href="http://www.itsthesearstower.com/" target="_blank">ItsTheSearsTower.com</a>.',
     successimage: '<img src="https://carltongroup.com/wp-content/uploads/2015/08/willis-tower-chicago.jpg" alt="The Sears Tower (Willis Tower) illuminated at night." class="success-image">'},
 
     // 9
@@ -106,7 +106,6 @@ const STORE = [
 function renderChicagoQuiz(questionNumber) {
     $('.start-quiz').click(function(event){
         renderQuizQuestion(questionNumber);
-        $(this).closest('div').addClass('hidden');
         submitQuizAnswer(questionNumber);
     });
     $('.next-question').click(function(event){
@@ -122,40 +121,41 @@ function startQuiz() {
 }
 
 function renderQuizQuestion(questionNumber) {
-    const quizQuestionString = generateQuizQuestion(STORE[questionNumber]);  
-    $('.quizForm').html(quizQuestionString); 
-    $('.question-number').text(questionNumber+1);
+    if (questionNumber < STORE.length) {
+        const quizQuestionString = generateQuizQuestion(questionNumber);
+        $('.quizForm').html(quizQuestionString); 
+        $('.question-number').text(questionNumber+1);
+    }
+    else {
+        renderQuizCompleted();
+    }
 }
 
-function generateQuizQuestion(item) {
-    console.log()
-    //     if (questionNumber < STORE.length) {}
-    // else {
-    //     renderQuizCompleted();
-    // }
+function generateQuizQuestion(questionNumber) {
+    let item = STORE[questionNumber];
     return `
     <div class="quiz-question">
-      <form>
+    <form>
         <fieldset>
-          <legend>${item.question}</legend>
-          <ul>
+        <legend>${item.question}</legend>
+        <ul>
             <li>
-              <input type="radio" name="question${item}" value="${item.answer1}" required>${item.answer1} 
+            <input type="radio" id="radio1" name="question${item}" value="${item.answer1}" required><label for="radio1"> ${item.answer1}</label> 
             </li>
             <li>
-              <input type="radio" name="question${item}" value="${item.answer2}" required>${item.answer2} 
+            <input type="radio" id="radio2" name="question${item}" value="${item.answer2}" required><label for="radio2">${item.answer2}</label>
             </li>
             <li>
-              <input type="radio" name="question${item}" value="${item.answer3}" required>${item.answer3} 
+            <input type="radio" id="radio3" name="question${item}" value="${item.answer3}" required><label for="radio3">${item.answer3}</label> 
             </li>
             <li>
-              <input type="radio" name="question${item}" value="${item.answer4}" required>${item.answer4} 
+            <input type="radio" id="radio4" name="question${item}" value="${item.answer4}" required><label for="radio4">${item.answer4}</label>
             </li>
-          </ul>
-          <span class="error-text"></span>
-          <button type="submit" value="Submit" class="submit-answer">Submit</button>
+        </ul>
+        <span class="error-text"></span>
+        <button type="submit" value="Submit" class="submit-answer">Submit</button>
         </fieldset>
-      </form>
+    </form>
     </div>`;
 }
 
@@ -209,8 +209,8 @@ function renderCurrentScore(score) {
 }
 
 function renderQuizCompleted() {
-    let score = $('.score').text()
-    $('.quiz-form').html(`
+    let score = $('.score').text();
+    $('.quizForm').html(`
     <div class="results">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Flag_of_Chicago%2C_Illinois.svg/255px-Flag_of_Chicago%2C_Illinois.svg.png" 
     alt="The Chicago flag" class="success-image">
@@ -220,6 +220,7 @@ function renderQuizCompleted() {
     </form>
     </div>`);
     restartQuiz();
+    console.log(`renderQuizCompleted ran.`);
 }
 
 function restartQuiz() {

@@ -2,15 +2,52 @@
     box-sizing: border-box;
     margin:0;
     padding:0;
-    background-color:lightblue;
 }
+
+/*doesn't show first item as selected until arrow keys*/
 
 body {
     text-align:center;
+    background: #add8e6;
+    margin-bottom:75px;
+    font-family: 'Archivo', sans-serif;
+}
+
+header {
+    background: url(https://cdn3.iconfinder.com/data/icons/famous-city-skyline/48/Sed-13-512.png);
+    background-position-x: center;
+    background-position-y: bottom;
+    background-size:200px;
+    background-repeat:no-repeat;
+    height:170px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
 }
 
 h1 {
-    font-size: 18px;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.quizForm {
+    min-width: 300px;
+    max-width: 75%;
+    border-radius:5px;
+    margin-right:auto;
+    margin-left:auto;
+}
+
+footer {
+    width:100%;
+    margin-right:auto;
+    margin-left:auto;
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    padding-bottom:10px;
+    background:red;
 }
 
 h3, legend {
@@ -24,7 +61,8 @@ fieldset {
     margin-right:auto;
     margin-left:auto;
     border: 1px solid black;
-    border-radius:10px;
+    border-radius:5px;
+    background:lightblue;
 }
 
 ul {
@@ -36,20 +74,45 @@ ul {
 li {
     width: 100%;
     background-color:white;
-    color:blue;
-    text-align:left;
-    border: 1px solid white;
     margin-top:10px;
     border-radius: 10px;
     font-size:16px;
     text-align:center;
 }
 
-li span {
-    background-color:white;
+li.footer {
+    min-width:200px;
+    max-width:60%;
+    margin-right:auto;
+    margin-left:auto;
+    color:black;
 }
 
-button, input {
+.pride {
+    font-weight:bolder;
+}
+
+.p {
+    color:red;
+}
+
+.r {
+    color:orange;
+}
+
+.i {
+    color:green;
+}
+
+.d {
+    color:blue;
+}
+
+.e {
+    color:purple;
+}
+
+button {
     padding: 10px;
     margin-left: auto;
     margin-right:auto;
@@ -61,11 +124,23 @@ button, input {
     display:block;
 }
 
+input {
+    clip-path:polygon(0 0);
+}
+
+label {
+    cursor:pointer;
+}
+
+input:checked + label {
+    font-weight:bold;
+    color:red;
+}
+
 h2 {
     margin-top:20px;
     margin-bottom:20px;
     font-size:18px;
-    color:red;
 }
 
 div.current-score {
@@ -75,20 +150,9 @@ div.current-score {
 }
 
 .success-image {
-    max-width: 350px;
-    max-height: 250px;
+    height:250px;
     border-radius: 10px;
     margin-top: 10px;
-}
-
-footer {
-    margin-top: 20px;
-    font-size:14px;
-}
-
-.quizform {
-    min-width: 200px;
-    max-width:75%;
 }
 
 .error-text {
@@ -100,12 +164,13 @@ footer {
     display:none;
 }
 
-@media only screen and (min-width:600px) {
+@media only screen and (min-width:1000px) {
     ul {
         flex-direction:row;
     }
 
     li {
         margin:10px;
+        padding:5px;
     }
 }
