@@ -134,25 +134,25 @@ function renderQuizQuestion(questionNumber) {
 function generateQuizQuestion(questionNumber) {
     let item = STORE[questionNumber];
     return `
-    <form>
+    <form role="form">
         <fieldset>
         <legend>${item.question}</legend>
-        <ul>
-            <li>
+        <ul role="radiogroup">
+            <li role="radio">
             <input type="radio" id="radio1" name="question${item}" value="${item.answer1}" required><label for="radio1"> ${item.answer1}</label> 
             </li>
-            <li>
+            <li role="radio">
             <input type="radio" id="radio2" name="question${item}" value="${item.answer2}" required><label for="radio2">${item.answer2}</label>
             </li>
-            <li>
+            <li role="radio">
             <input type="radio" id="radio3" name="question${item}" value="${item.answer3}" required><label for="radio3">${item.answer3}</label> 
             </li>
-            <li>
+            <li role="radio">
             <input type="radio" id="radio4" name="question${item}" value="${item.answer4}" required><label for="radio4">${item.answer4}</label>
             </li>
         </ul>
         <span class="error-text"></span>
-        <button type="submit" value="Submit" class="submit-answer">Submit</button>
+        <button type="submit" value="Submit" class="submit-answer" role="button">Submit</button>
         </fieldset>
     </form>`;
 }
@@ -184,22 +184,18 @@ function evaluateAnswer(answerVal, questionNumber) {
 
 function userFeedbackCorrect(item) {
     $('.quizForm').html(`
-    <div class="user-feedback">
-    <h2>Correct!</h2>
+    <h2 role="heading">Correct!</h2>
     <div class="user-feedback-text">${item.successtext}</div>
     ${item.successimage}
-    <button type="button" class="next-question">Continue</button>
-    </div>`);
+    <button type="button" class="next-question" role="button">Continue</button>`);
 }
 
 function userFeedbackWrong(item) {
     $('.quizForm').html(`
-    <div class="user-feedback">
-    <h2>Wrong!</h2>
+    <h2 role="heading">Wrong!</h2>
     <div class="user-feedback-text">${item.successtext}</div>
     ${item.successimage}
-    <button type="button" class="next-question">Continue</button>
-    </div>`);
+    <button type="button" class="next-question" role="button">Continue</button>`);
 }
 
 function renderCurrentScore(score) {
@@ -209,16 +205,13 @@ function renderCurrentScore(score) {
 function renderQuizCompleted() {
     let score = $('.score').text();
     $('.quizForm').html(`
-    <div class="results">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Flag_of_Chicago%2C_Illinois.svg/255px-Flag_of_Chicago%2C_Illinois.svg.png" 
     alt="The Chicago flag" class="success-image">
-    <h2>You scored</h2>
-    <div class="current-score">${score} out of 10 points!</div>
-    <button class="restart-quiz" type="submit">Take the quiz again!</button>
-    </form>
+    <h2 role="heading">You scored</h2>
+    <div>${score} out of 10 points!</div>
+    <button class="restart-quiz" type="submit" role="button">Take the quiz again!</button>
     </div>`);
     restartQuiz();
-    console.log(`renderQuizCompleted ran.`);
 }
 
 function restartQuiz() {
