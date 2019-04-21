@@ -45,7 +45,7 @@ footer {
     left:0px;
     right:0px;
     padding-bottom:10px;
-    background:red;
+    background:#B80000;
 }
 
 h3, legend {
@@ -60,7 +60,7 @@ fieldset {
     margin-left:auto;
     border: 1px solid black;
     border-radius:5px;
-    background:lightblue;
+    background:#add8e6;
 }
 
 ul {
@@ -76,6 +76,7 @@ li {
     border-radius: 10px;
     font-size:16px;
     text-align:center;
+    border: 1px solid white;
 }
 
 li.footer {
@@ -116,7 +117,7 @@ button {
     margin-right:auto;
     margin-top:10px;
     font-size:14px;
-    background-color:red;
+    background-color:#B80000;
     color:white;
     border-radius:10px;
     display:block;
@@ -124,7 +125,7 @@ button {
 
 input {
     clip-path:polygon(0 0);
-}
+} 
 
 label {
     cursor:pointer;
@@ -132,13 +133,18 @@ label {
 
 input:checked + label {
     font-weight:bold;
-    color:red;
+    color:#B80000;
+}
+
+li:focus-within {
+    border:1px solid lightsteelblue;
 }
 
 h2 {
     margin-top:20px;
     margin-bottom:20px;
     font-size:18px;
+    color:#B80000;
 }
 
 .success-image {
@@ -149,7 +155,8 @@ h2 {
 
 .error-text {
     display:block;
-    color:red;
+    color:#B80000;
+    font-weight:bold;
 }
 
 @media only screen and (min-width:1000px) {
