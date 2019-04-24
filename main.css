@@ -4,6 +4,10 @@
     padding:0;
 }
 
+:focus {
+    outline:none;
+}
+
 body {
     text-align:center;
     background: #add8e6;
@@ -123,6 +127,10 @@ button {
     display:block;
 }
 
+button:focus, button:hover {
+    box-shadow:-3px 3px 3px darkgray;
+}
+
 input {
     clip-path:polygon(0 0);
 } 
@@ -136,8 +144,8 @@ input:checked + label {
     color:#B80000;
 }
 
-li:focus-within {
-    border:1px solid lightsteelblue;
+li:focus-within, li:hover {
+    box-shadow:-3px 3px 3px gray;
 }
 
 h2 {
